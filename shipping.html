@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinoy Fries - Shipping Information</title>
+<link rel="icon" href="logo.png" type="image/png">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    background-image: url('https://img.freepik.com/free-photo/crispy-golden-french-fries-with-falling-seasoning_84443-75181.jpg?semt=ais_rp_50_assets&w=740&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background-color: rgba(255, 140, 0, 0.95);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+}
+
+.nav-links a {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #fff200;
+    transform: scale(1.05);
+}
+
+/* Two-column card */
+.card-container {
+    display: flex;
+    max-width: 900px;
+    margin: 120px auto 50px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* Left section (image + message) */
+.card-left {
+    flex: 1;
+    background: url('https://images.stockcake.com/public/2/a/b/2abfad8d-31a4-49c2-92fb-5ec6571e2f35_large/flying-fries-fest-stockcake.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2rem;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+
+.card-left h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.card-left p {
+    font-size: 1.1rem;
+}
+
+/* Right section (form) */
+.card-right {
+    flex: 1;
+    padding: 2.5rem;
+}
+
+.form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FF8C00;
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+
+.form-subtitle {
+    font-size: 1rem;
+    text-align: center;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+/* Input fields */
+.input-icon {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-icon input,
+.input-icon select {
+    width: 100%;
+    padding: 0.6rem 0.6rem 0.6rem 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    background-color: #fff8f0;
+}
+
+.input-icon input:focus,
+.input-icon select:focus {
+    outline: none;
+    border-color: #FF8C00;
+    box-shadow: 0 0 8px rgba(255,140,0,0.4);
+}
+
+.input-icon i {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+/* Buttons */
+.submit-button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #FF8C00, #ffb347);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.submit-button:hover {
+    background: linear-gradient(90deg, #e07b00, #ffa347);
+    transform: scale(1.03);
+}
+
+/* Confirmation popup */
+.centered-message {
+    display: none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    text-align: center;
+    width: 350px;
+    z-index: 1000;
+}
+
+.centered-message p {
+    margin: 8px 0;
+    color: #333;
+}
+
+#ok-button {
+    margin-top: 15px;
+}
+
+/* Loader */
+.loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #FF8C00;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media(max-width:768px){
+    .card-container {
+        flex-direction: column;
+        margin: 100px 1rem 50px;
+    }
+    .card-left {
+        height: 250px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="nav-links">
+    <a href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
+    <a href="fries.html"><i class="fas fa-hamburger mr-2"></i>Fries</a>
+</div>
+
+<!-- Two-column Card -->
+<div class="card-container">
+    <!-- Left side -->
+    <div class="card-left">
+        <div>
+            <h2>Fresh & Crispy!</h2>
+            <p>Get your fries delivered fast and hot.</p>
+        </div>
+    </div>
+
+    <!-- Right side -->
+    <div class="card-right">
+        <h2 class="form-title">Order Shipping</h2>
+        <p class="form-subtitle">Fill in your details to receive your fries!</p>
+        <form id="shipping-form">
+            <div class="input-icon">
+                <i class="fas fa-calendar-alt"></i>
+                <input type="text" id="date" readonly>
+            </div>
+            <div class="input-icon">
+                <i class="fas fa-user"></i>
+                <input type="text" id="name" placeholder="Full Name" required>
+            </div>
+            <div class="input-icon">
+                <i class="fas fa-map-marker-alt"></i>
+                <select id="address" name="address" required>
+                    <option value="" disabled selected>Select your Barangay</option>
+                    <option value="Balubohan">Balubohan</option>
+                    <option value="Bitoon">Bitoon</option>
+                    <option value="Casiboy">Casiboy</option>
+                    <option value="Dacotan">Dacotan</option>
+                    <option value="East Poblacion">East Poblacion</option>
+                    <option value="Goa">Goa</option>
+                    <option value="La Esperanza">La Esperanza</option>
+                    <option value="Libertad">Libertad</option>
+                    <option value="Mabuhay">Mabuhay</option>
+                    <option value="Mitimos">Mitimos</option>
+                    <option value="Nangca-an">Nangca-an</option>
+                    <option value="Napilan">Napilan</option>
+                    <option value="New Dapitan">New Dapitan</option>
+                    <option value="North Mapang">North Mapang</option>
+                    <option value="Rizalina">Rizalina</option>
+                    <option value="San Roque">San Roque</option>
+                    <option value="Sipaon">Sipaon</option>
+                    <option value="South Mapang">South Mapang</option>
+                    <option value="Tolon">Tolon</option>
+                    <option value="Upper Gutarapa">Upper Gutarapa</option>
+                    <option value="West Poblacion">West Poblacion</option>
+                </select>
+            </div>
+            <div class="input-icon">
+                <i class="fas fa-phone"></i>
+                <input type="tel" id="number" placeholder="+63 9xx xxx xxxx" required>
+            </div>
+            <button type="submit" class="submit-button"><i class="fas fa-truck mr-2"></i>Submit Order</button>
+        </form>
+    </div>
+</div>
+
+<!-- Confirmation Message -->
+<div id="confirmation-message" class="centered-message">
+    <img src="logo.png" alt="Pinoy Fries Logo" class="mx-auto mb-2" style="width:60px">
+    <p><strong>THANK YOU!</strong></p>
+    <p>Your order has been submitted successfully.</p>
+    <p>Contact: +63 912 345 6789</p>
+    <p>Email: <a href="mailto:support@pinoyfries.ph">support@pinoyfries.ph</a></p>
+    <button id="ok-button" class="submit-button mt-3"><i class="fas fa-check mr-2"></i>OK</button>
+</div>
+
+<!-- Loader -->
+<div id="loading" class="hidden fixed inset-0 flex items-center justify-center bg-gray-300 bg-opacity-50">
+    <div class="loader"></div>
+</div>
+
+<script>
+document.getElementById('date').value = new Date().toLocaleDateString('en-PH');
+
+document.getElementById('shipping-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('loading').classList.remove('hidden');
+
+    const date = document.getElementById('date').value;
+    const name = document.getElementById('name').value;
+    const address = document.getElementById('address').value;
+    const number = document.getElementById('number').value;
+
+    localStorage.setItem('customerDate', date);
+    localStorage.setItem('customerName', name);
+    localStorage.setItem('customerAddress', address);
+    localStorage.setItem('customerNumber', number);
+
+    document.querySelector('.card-container').style.display = 'none';
+    document.getElementById('loading').classList.add('hidden');
+    document.getElementById('confirmation-message').style.display = 'block';
+});
+
+document.getElementById('ok-button').addEventListener('click', function(){
+    window.location.href = 'receipt.html';
+});
+</script>
+
+</body>
+</html>

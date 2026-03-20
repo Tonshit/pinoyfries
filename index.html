@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PINOY FRIES.</title>
+<link rel="icon" href="logo.png" type="image/png"/>
+
+<!-- Tailwind + Font Awesome -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<style>
+/* Body */
+body { font-family: 'Poppins', sans-serif; background:#1a1a1a; color:white; overflow:hidden; margin:0; padding:0; }
+
+/* Navbar full width */
+header { position:fixed; width:100%; left:0; top:0; z-index:50; backdrop-blur:6px; background:rgba(0,0,0,0.5); border-bottom:2px solid #FFD700; }
+.header-container { max-width:100%; margin:0 auto; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+.header-link { color:white; font-weight:600; transition:0.3s; }
+.header-link:hover { color:#FFD700; text-shadow:0 0 10px #FFD700; }
+
+/* Slideshow */
+.bg-slideshow { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; z-index:-1; }
+.bg-slideshow img { position:absolute; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.2s ease-in-out; filter:brightness(0.6); }
+.bg-slideshow img.active { opacity:1; }
+
+/* Text Overlay */
+.text-overlay { position:absolute; inset:0; z-index:10; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 20px; }
+.text-overlay p { color:#FFD700; text-transform:uppercase; letter-spacing:4px; font-weight:600; text-shadow: 0 0 10px rgba(255,215,0,0.8);}
+.text-overlay h1 { font-weight:800; font-size:3rem; line-height:1.2; color:white; text-shadow:0 0 20px rgba(0,0,0,0.7); margin-top:10px; }
+
+/* SHOP NOW button */
+.shop-button { background:linear-gradient(145deg,#FFD700,#FFA500); box-shadow:0 5px 15px rgba(0,0,0,0.5); transition:0.3s; display:flex; align-items:center; gap:5px; padding:0.75rem 1.5rem; border-radius:12px; }
+.shop-button:hover { transform:translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,0.6); background:linear-gradient(145deg,#FFA500,#FFD700); }
+
+
+/* Sparkle particles */
+canvas { position:absolute; top:0; left:0; width:100%; height:100%; z-index:15; pointer-events:none; }
+
+/* Scroll Down */
+.scroll-down { margin-top:40px; color:#FFD700; animation:bounce 2s infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(15px);} }
+
+/* Bottom Gallery */
+.bottom-gallery { position:fixed; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:12px; z-index:40; }
+.bottom-gallery img { width:60px; height:60px; object-fit:contain; border-radius:8px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); transition: transform 0.3s, filter 0.3s; }
+.bottom-gallery img:hover { transform: translateY(-6px) scale(1.1); filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5)); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-container">
+    <div class="flex items-center">
+      <img src="logo.png" alt="Logo" class="h-10 w-10"/>
+      <span class="ml-3 text-xl font-bold">PINOY FRIES.</span>
+    </div>
+    <nav class="hidden md:flex space-x-6">
+      <a class="header-link" href="frontcover.html"><i class="fas fa-home mr-2"></i>HOME</a>
+      <a class="header-link" href="alcoholicbeer.html"><i class="fas fa-utensils mr-2"></i>FRIES</a>
+      <a class="header-link" href="about.html"><i class="fas fa-info-circle mr-2"></i>ABOUT</a>
+      <a class="header-link" href="cart.html"><i class="fas fa-shopping-cart mr-2"></i>CART</a>
+      <a class="header-link" href="contact.html"><i class="fas fa-envelope mr-2"></i>CONTACT</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Main -->
+<main class="relative h-screen flex items-center justify-center">
+
+  <!-- Slideshow -->
+  <div class="bg-slideshow">
+    <img class="active" src="image1.png" alt="Background 1"/>
+    <img src="image2.png" alt="Background 2"/>
+    <img src="image3.png" alt="Background 3"/>
+  </div>
+
+
+  <!-- Sparkles -->
+  <canvas id="sparkleCanvas"></canvas>
+
+  <!-- Text Overlay -->
+  <div class="text-overlay">
+    <p>Best Crispy Fries in Town</p>
+    <h1>WE’VE TASTED CRAVINGS<br/>AND CRISPY GOODNESS,<br/>WE HIGHLY RECOMMEND FRIES</h1>
+    <a href="alcoholicbeer.html">
+      <button class="shop-button mt-6">
+        <i class="fas fa-utensils mr-2"></i>SHOP NOW
+      </button>
+    </a>
+    <div class="scroll-down text-3xl mt-10"><i class="fas fa-chevron-down"></i></div>
+  </div>
+
+<!-- Bottom Endless Scrolling Gallery -->
+<div class="bottom-gallery-scroll">
+  <div class="bottom-gallery-track">
+    <!-- First set of images -->
+    <img src="fries.png" class="bottom-img-full" />
+    <img src="fries1.png" class="bottom-img-full" />
+    <img src="fries3.png" class="bottom-img-full" />
+    <img src="fries4.png" class="bottom-img-full" />
+    <img src="fries5.png" class="bottom-img-full" />
+    <img src="fries6.png" class="bottom-img-full" />
+    <img src="fries7.png" class="bottom-img-full" />
+    <img src="fries8.png" class="bottom-img-full" />
+    <img src="fries9.png" class="bottom-img-full" />
+    <img src="fries10.png" class="bottom-img-full" />
+    <!-- Duplicate for endless effect -->
+    <img src="fries.png" class="bottom-img-full" />
+    <img src="fries1.png" class="bottom-img-full" />
+    <img src="fries3.png" class="bottom-img-full" />
+    <img src="fries4.png" class="bottom-img-full" />
+    <img src="fries5.png" class="bottom-img-full" />
+    <img src="fries6.png" class="bottom-img-full" />
+    <img src="fries7.png" class="bottom-img-full" />
+    <img src="fries8.png" class="bottom-img-full" />
+    <img src="fries9.png" class="bottom-img-full" />
+    <img src="fries10.png" class="bottom-img-full" />
+  </div>
+</div>
+
+<style>
+.bottom-gallery-scroll {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  height: 120px;
+}
+
+/* Track containing duplicated images */
+.bottom-gallery-track {
+  display: flex;
+  gap: 2px;
+  width: max-content;
+  animation: scrollLoop 25s linear infinite;
+}
+
+/* Images */
+.bottom-img-full {
+  flex: 0 0 auto;
+  max-height: 120px;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+.bottom-img-full:hover {
+  transform: scale(1.05);
+}
+
+/* Endless scroll animation */
+@keyframes scrollLoop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* move by one set of images */
+}
+</style>
+<script>
+// Slideshow
+const images = document.querySelectorAll('.bg-slideshow img');
+let index = 0;
+setInterval(()=>{
+  images[index].classList.remove('active');
+  index = (index+1)%images.length;
+  images[index].classList.add('active');
+},3000);
+
+// Falling Logos
+const container = document.querySelector('.fries-container');
+const friesCount = 20;
+for(let i=0;i<friesCount;i++){
+  let fry = document.createElement('img');
+  fry.src='logo.png'; // Brand logo as falling image
+  fry.classList.add('falling-fries');
+  fry.style.left = Math.random()*100+'vw';
+  fry.style.animationDuration = (Math.random()*5+4)+'s';
+  fry.style.width = (20+Math.random()*30)+'px';
+  container.appendChild(fry);
+}
+
+// Sparkle Particles
+const canvas = document.getElementById('sparkleCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const particles=[];
+for(let i=0;i<100;i++){
+  particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, size:Math.random()*3+1, speedY:Math.random()*1+0.5, speedX:(Math.random()-0.5)*0.5});
+}
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.fillStyle='rgba(255,215,0,0.8)';
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
+    p.y+=p.speedY;
+    p.x+=p.speedX;
+    if(p.y>canvas.height)p.y=0;
+    if(p.x>canvas.width)p.x=0;
+    if(p.x<0)p.x=canvas.width;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
+</script>
+
+</body>
+</html>

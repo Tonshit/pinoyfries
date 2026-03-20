@@ -1,0 +1,86 @@
+/* Base styles */
+body {
+    background-color: #1a202c;
+    color: #fff;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+/* Button styles */
+button {
+    background-color: #facc15;
+    color: #000;
+    padding: 0.75rem 2rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Shop Button Pulse */
+.shop-button {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Header link hover */
+.header-link {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.header-link:hover {
+    color: #fbbf24;
+    transform: scale(1.1);
+}
+
+/* Glowing title */
+.glow-text {
+    color: #fff;
+    text-shadow: 0 0 10px #facc15,0 0 20px #facc15,0 0 40px #facc15,0 0 80px #facc15;
+    animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+    from { text-shadow:0 0 10px #facc15; }
+    to { text-shadow:0 0 30px #facc15,0 0 60px #facc15; }
+}
+
+/* Fire glow behind slideshow */
+.fire-glow {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: radial-gradient(circle, rgba(255,150,0,0.3) 0%, rgba(255,80,0,0) 70%);
+    z-index:0;
+    animation: glowPulse 3s infinite alternate;
+}
+@keyframes glowPulse {
+    0%{opacity:0.4;}
+    50%{opacity:0.6;}
+    100%{opacity:0.4;}
+}
+
+/* Falling Fries */
+.fries-container { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden; z-index:5; }
+.falling-fries { position:absolute; font-size:20px; color:#facc15; animation:fall linear infinite; }
+@keyframes fall {
+    0% { transform:translateY(-50px) rotate(0deg); }
+    100% { transform:translateY(110vh) rotate(360deg); }
+}
+
+/* Scroll arrow bounce */
+.scroll-down { animation: bounce 2s infinite; }
+@keyframes bounce {
+    0%,20%,50%,80%,100% { transform:translateY(0); }
+    40% { transform:translateY(-10px); }
+    60% { transform:translateY(-5px); }
+}

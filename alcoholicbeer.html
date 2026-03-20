@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pinoy Fries</title>
+<link rel="icon" href="logo.png" type="image/png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<style>
+body {
+    background-image: url('https://images.stockcake.com/public/5/4/e/54e3ae37-1cda-4699-a981-72003473025c/crispy-golden-fries-stockcake.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+/* Dark overlay for text readability */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+    z-index: -1;
+}
+
+/* Navigation */
+nav a { transition: color 0.3s; }
+
+/* Hero-style Title */
+h2 { 
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7); 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    animation: textPop 1s ease-out; 
+}
+
+/* Hero Animation */
+@keyframes textPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Product Card */
+.product-container {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    padding: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    text-align: center;
+    backdrop-filter: blur(3px);
+}
+.product-container:hover {
+    transform: scale(1.07) rotate(-1deg);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+.product-container:hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(246,201,14,0.7);
+    pointer-events: none;
+}
+
+/* Product Image */
+.product-image { 
+    width: 100%;
+    height: auto;
+    border-radius: 12px; 
+    object-fit: cover;
+    cursor: pointer; 
+    transition: transform 0.3s; 
+    animation: wiggle 2s ease-in-out infinite alternate;
+}
+.product-image:hover { transform: scale(1.1) rotate(3deg); }
+
+@keyframes wiggle {
+  0%,100% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  75% { transform: rotate(-2deg); }
+}
+
+/* BEST SELLER Badge */
+.best-seller-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #f6c90e;
+    color: #000;
+    font-weight: bold;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index:10;
+    transform: rotate(-10deg);
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 5px #f6c90e; }
+    to { box-shadow: 0 0 15px #f6c90e; }
+}
+
+/* Star Rating */
+.star-rating i { 
+    color: #f6c90e;
+    margin: 0 1px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: scale(0);
+    animation: starPop 0.5s forwards;
+}
+
+@keyframes starPop {
+    to { opacity: 1; transform: scale(1); }
+}
+
+.star-rating i:nth-child(1){ animation-delay: 0.1s; }
+.star-rating i:nth-child(2){ animation-delay: 0.2s; }
+.star-rating i:nth-child(3){ animation-delay: 0.3s; }
+.star-rating i:nth-child(4){ animation-delay: 0.4s; }
+.star-rating i:nth-child(5){ animation-delay: 0.5s; }
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    animation: zoomIn 0.5s;
+    transition: transform 0.5s ease;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.close:hover {
+    color: red;
+    transform: rotate(90deg);
+}
+
+@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+@keyframes zoomIn { from { transform:scale(0) } to { transform:scale(1) } }
+
+/* Cart Button */
+.view-cart-button {
+    margin: 20px 0;
+    background-color: #e99220;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.view-cart-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    animation: bounce 0.6s;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.cart-icon { margin-right: 0.5rem; }
+
+.cart-notification {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    display: none;
+}
+
+@keyframes bounce {
+    0%,100%{transform:scale(1);}
+    30%{transform:scale(1.3);}
+    50%{transform:scale(1.2);}
+    70%{transform:scale(1.25);}
+}
+
+@keyframes pulse {
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.3);}
+}
+
+.cart-bounce { animation: bounce 0.5s; }
+.cart-notification.show { display:block; animation: pulse 0.5s ease-in-out; }
+
+/* Floating notification container */
+#notification-container {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 50;
+}
+
+.notification-card {
+    max-width: 18rem;
+    background-color: #e6ffed;
+    border-left: 4px solid #16a34a;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    color: #065f46;
+    opacity: 0;
+    transform: translateX(120%);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.notification-card.show {
+    opacity: 1;
+    transform: translateX(0);
+    animation: slideBounce 0.5s;
+}
+
+.notification-card.error {
+    background-color: #ffe6e6;
+    border-left-color: #dc2626;
+    color: #991b1b;
+}
+
+.notification-card button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: inherit;
+    font-weight: bold;
+}
+
+@keyframes slideBounce {
+    0% { transform: translateX(120%); }
+    60% { transform: translateX(-10%); }
+    80% { transform: translateX(5%); }
+    100% { transform: translateX(0); }
+}
+
+/* Quantity Input Hover */
+input[type=number]:hover { border-color: #f6c90e; }
+input[type=number]::-webkit-inner-spin-button { cursor:pointer; }
+
+/* Responsive Adjustments */
+@media (max-width: 640px){
+  .product-container .flex.items-center { flex-direction: column; }
+  .product-container button { width: 100%; margin-top: 0.5rem; border-radius: 0.375rem; }
+  .product-container input { width: 50%; margin-bottom: 0.5rem; }
+}
+</style>
+
+<script>
+let cartCount = 0;
+
+window.onload = function() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartCount = cart.reduce((total,item)=>total+item.quantity,0);
+    updateCartCount();
+    renderProducts();
+
+    ScrollReveal().reveal('.product-container', {
+        delay: 100,
+        distance: '50px',
+        origin: 'bottom',
+        duration: 800,
+        interval: 100
+    });
+};
+
+window.addEventListener('storage', function(e) {
+    if (e.key === 'customFries') {
+        renderProducts();
+    }
+});
+
+// Floating notifications
+function showNotification(message, type='success') {
+    const container = document.getElementById('notification-container');
+    const card = document.createElement('div');
+    card.className = `notification-card ${type==='error' ? 'error' : ''}`;
+    card.innerHTML = `<span>${message}</span><button>&times;</button>`;
+    container.appendChild(card);
+
+    requestAnimationFrame(() => card.classList.add('show'));
+    card.querySelector('button').addEventListener('click', () => hideNotification(card));
+    setTimeout(() => hideNotification(card), 5000);
+}
+
+function hideNotification(card) {
+    card.classList.remove('show');
+    card.addEventListener('transitionend', () => card.remove());
+}
+
+function addToCart(product, quantity) {
+    if (quantity < 1) return;
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const index = cart.findIndex(item => item.name === product.name);
+
+    if (index > -1) {
+        cart[index].quantity += parseInt(quantity);
+        cart[index].subtotal = (parseFloat(cart[index].price.replace('₱','')) * cart[index].quantity).toFixed(2);
+    } else {
+        product.quantity = parseInt(quantity);
+        product.subtotal = (parseFloat(product.price.replace('₱','')) * product.quantity).toFixed(2);
+        cart.push(product);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    cartCount += parseInt(quantity);
+    updateCartCount();
+
+    const cartBtn = document.querySelector('.view-cart-button');
+    cartBtn.classList.remove('cart-bounce');
+    void cartBtn.offsetWidth;
+    cartBtn.classList.add('cart-bounce');
+
+    const notification = document.getElementById('cartCount');
+    notification.classList.remove('show');
+    void notification.offsetWidth;
+    notification.classList.add('show');
+
+    showNotification(`${product.name} added to cart!`);
+}
+
+function updateCartCount() {
+    const cartCountElement = document.getElementById('cartCount');
+    cartCountElement.textContent = cartCount;
+    cartCountElement.style.display = cartCount > 0 ? 'block' : 'none';
+}
+
+function openModal(src) {
+    document.getElementById("myModal").style.display = "flex";
+    document.getElementById("img01").src = src;
+}
+
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+}
+
+function getAllProducts() {
+    const defaultProducts = [
+        {name:"CLASSIC FRIES",price:"₱125.00",image:"fries1.png",desc:"Approx. 250g – Medium portion",stars:3.5,best:true},
+        {name:"CHILI CHEESE FRIES",price:"₱130.00",image:"fries.png",desc:"Approx. 250g – Medium portion",stars:4,best:true},
+        {name:"MEGA FRIES",price:"₱140.00",image:"fries3.png",desc:"Approx. 300g – Large portion",stars:3},
+        {name:"OVERLOAD FRIES",price:"₱135.00",image:"fries4.png",desc:"Approx. 280g – Large portion",stars:3.5,best:true},
+        {name:"PEPPER SEASONED FRIES",price:"₱125.00",image:"fries5.png",desc:"Approx. 250g – Medium portion",stars:3},
+        {name:"BIG CHUNK FRIES",price:"₱145.00",image:"fries6.png",desc:"Approx. 300g – Large portion",stars:3.5,best:true},
+        {name:"FINGER CUT FRIES",price:"₱145.00",image:"fries7.png",desc:"Approx. 250g – Medium portion",stars:3},
+        {name:"JUTS FRIES",price:"₱145.00",image:"fries8.png",desc:"Approx. 250g – Medium portion",stars:3.5,best:true}
+    ];
+
+    const customProducts = JSON.parse(localStorage.getItem('customFries')) || [];
+    return [...defaultProducts, ...customProducts];
+}
+
+function renderStars(stars) {
+    return [1,2,3,4,5].map(n =>
+        n <= Math.floor(stars)
+            ? '<i class="fas fa-star"></i>'
+            : n - 0.5 === stars
+                ? '<i class="fas fa-star-half-alt"></i>'
+                : '<i class="far fa-star"></i>'
+    ).join('');
+}
+
+function renderProducts() {
+    const products = getAllProducts();
+    const productsGrid = document.getElementById('productsGrid');
+
+    productsGrid.innerHTML = products.map((p, i) => `
+        <div class="product-container">
+            ${p.best ? '<div class="best-seller-badge">BEST SELLER</div>' : ''}
+            <img src="${p.image}" class="product-image" onclick="openModal(this.src)"/>
+            <p class="mt-2 font-bold">${p.name}</p>
+            <p class="text-sm text-gray-700">${p.desc}</p>
+            <p class="text-lg font-bold">${p.price}</p>
+            <div class="flex justify-center mt-1 star-rating">
+                ${renderStars(p.stars)}
+            </div>
+            <div class="flex items-center justify-center mt-2">
+                <input type="number" min="1" value="1" class="border border-gray-300 rounded-l px-2 py-1 w-16 text-center" id="quantity${i+1}"/>
+                <button class="bg-orange-500 text-white px-4 py-1 rounded-r hover:bg-orange-600"
+                    onclick='addToCart({name:${JSON.stringify(p.name)},price:${JSON.stringify(p.price)},image:${JSON.stringify(p.image)}},document.getElementById("quantity${i+1}").value)'>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    `).join('');
+
+    ScrollReveal().clean('.product-container');
+    ScrollReveal().reveal('.product-container', {
+        delay: 100,
+        distance: '50px',
+        origin: 'bottom',
+        duration: 800,
+        interval: 100
+    });
+}
+</script>
+</head>
+<body>
+
+<!-- Navigation -->
+<div class="flex justify-between w-full p-4 bg-black bg-opacity-70">
+<nav class="flex space-x-4">
+<a class="text-white hover:text-yellow-500" href="index.html"><i class="fas fa-home mr-2"></i>HOME</a>
+<a class="text-white hover:text-yellow-500" href="cart.html"><i class="fas fa-shopping-cart mr-2"></i>CART</a>
+<a class="text-white hover:text-yellow-500" href="alcoholicbeer.html"><i class="fas fa-utensils mr-2"></i>FRIES</a>
+</nav>
+</div>
+
+<!-- Cart Button Only -->
+<div class="flex justify-start items-center gap-3 px-4">
+<a href="cart.html" class="view-cart-button">
+<i class="fas fa-shopping-cart cart-icon"></i> View Cart
+<span id="cartCount" class="cart-notification">0</span>
+</a>
+</div>
+
+<main class="container mx-auto py-8 px-6">
+<h2 class="text-3xl font-bold text-orange-600 mb-4 text-center">PINOY FRIES</h2>
+<div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+</main>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+<span class="close" onclick="closeModal()">&times;</span>
+<img class="modal-content" id="img01" alt="Enlarged Image"/>
+</div>
+
+<!-- Floating Notifications Container -->
+<div id="notification-container"></div>
+
+</body>
+</html>

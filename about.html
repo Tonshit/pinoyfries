@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Pinoy Fries</title>
+    <!-- Favicon -->
+    <link rel="icon" href="logo.png" type="image/png"/>
+
+    <!-- Tailwind & Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Navigation Header -->
+    <header class="bg-black bg-opacity-80 backdrop-blur-md py-4 shadow-lg fixed w-full z-20">
+        <div class="container mx-auto flex justify-between items-center px-6 max-w-6xl">
+            <h1 class="text-2xl font-bold text-yellow-400">Pinoy Fries</h1>
+            <nav class="flex space-x-6">
+                <a class="hover:text-yellow-400 transition" href="frontcover.html">HOME</a>
+                <a class="hover:text-yellow-400 transition" href="fries.html">FRIES</a>
+                <a class="hover:text-yellow-400 transition" href="about.html">ABOUT</a>
+                <a class="hover:text-yellow-400 transition" href="cart.html">CART</a>
+                <a class="hover:text-yellow-400 transition" href="contact.html">CONTACT</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('aboutbg.png');">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div class="relative z-10 text-center px-6 md:px-0">
+            <h2 class="text-4xl md:text-6xl font-extrabold mb-4 text-yellow-400 border-l-4 border-yellow-400 pl-4 inline-block animate-pulse">Welcome to Pinoy Fries</h2>
+            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">Crispy, golden fries made fresh daily with premium potatoes. Taste the crunch, savor the flavor, and enjoy every bite!</p>
+            <a href="alcoholicbeer.html" class="bg-yellow-400 text-gray-900 font-bold py-3 px-6 rounded-lg transition transform hover:scale-105 hover:shadow-xl">Order Now</a>
+        </div>
+        <img src="fries1.png" alt="Fries hero" class="absolute bottom-0 right-0 w-1/3 hidden md:block animate-bounce">
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-gray-800">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h3 class="text-3xl font-bold mb-12 text-center text-yellow-400">What We Offer</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg hover:scale-105 transform transition duration-300">
+                    <div class="flex items-start mb-4">
+                        <i class="fas fa-utensils text-yellow-400 text-3xl mr-4"></i>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Freshly Cooked Fries</h4>
+                            <p>Prepared daily for the perfect crunch outside and soft center inside.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg hover:scale-105 transform transition duration-300">
+                    <div class="flex items-start mb-4">
+                        <i class="fas fa-pepper-hot text-yellow-400 text-3xl mr-4"></i>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Flavorful Seasonings</h4>
+                            <p>Classic, cheese, BBQ, and spicy — we have a flavor for every craving.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg hover:scale-105 transform transition duration-300">
+                    <div class="flex items-start mb-4">
+                        <i class="fas fa-box-open text-yellow-400 text-3xl mr-4"></i>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Custom Orders</h4>
+                            <p>Choose size, dips, and toppings for your ultimate fries experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-16 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 text-gray-900">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h3 class="text-3xl font-bold mb-12 text-center">Why Choose Pinoy Fries</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:scale-105 transform transition duration-300">
+                    <i class="fas fa-star text-yellow-500 text-4xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Premium Quality</h4>
+                    <p>Only the finest potatoes and ingredients go into every batch.</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:scale-105 transform transition duration-300">
+                    <i class="fas fa-heart text-yellow-500 text-4xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Made with Love</h4>
+                    <p>Every fries serving is crafted with care for taste and satisfaction.</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:scale-105 transform transition duration-300">
+                    <i class="fas fa-bolt text-yellow-500 text-4xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Fast Service</h4>
+                    <p>Quick preparation and delivery so you enjoy fries while hot and fresh.</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg hover:scale-105 transform transition duration-300">
+                    <i class="fas fa-smile text-yellow-500 text-4xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Customer Satisfaction</h4>
+                    <p>We value our customers — their smile is our ultimate reward.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-800">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h3 class="text-3xl font-bold mb-12 text-center text-yellow-400">What Our Customers Say</h3>
+            <div class="space-y-8">
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+                    <p class="italic mb-4">"Absolutely the best fries I've ever had! Perfectly crispy and flavorful." — Maria S.</p>
+                    <div class="flex items-center">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+                    <p class="italic mb-4">"I love the variety of seasonings! Spicy fries are my favorite." — John D.</p>
+                    <div class="flex items-center">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="py-12 bg-yellow-400 text-gray-900 text-center">
+        <h3 class="text-3xl font-bold mb-4">Ready for the Best Fries in Town?</h3>
+        <p class="mb-6">Order now and taste the difference!</p>
+        <a href="alcoholicbeer.html" class="bg-gray-900 text-yellow-400 font-bold py-3 px-6 rounded-lg hover:scale-105 transform transition">Order Now</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-6 text-center text-gray-400">
+        <p class="text-sm">Created by: Ranil Jay Mendez, Vincent Blez Zerna, Devith Tumaroy, Gerime Torsolado, Jems Lisondra, Derek Luke Elcamel, Lucy Janpearl Alingal</p>
+        <p class="text-sm">&copy; 2025 Choiyax Company. Enjoy Responsibly.</p>
+    </footer>
+
+</body>
+</html>

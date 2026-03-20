@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinoy Fries Admin Portal</title>
+<link rel="icon" href="logo.png" type="image/png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<style>
+    body {
+        background: linear-gradient(135deg, #ffe066, #ffa94d, #ff6b6b, #ff8787);
+        background-size: 400% 400%;
+        animation: gradientBG 20s ease infinite;
+        font-family: 'Poppins', sans-serif;
+    }
+    @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    /* Glass effect */
+    .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(15px);
+        transition: all 0.5s ease;
+    }
+
+    /* Tabs */
+    .tab-btn {
+        padding: 0.5rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        transition: all 0.3s;
+        position: relative;
+    }
+    .tab-btn.active {
+        color: #f59e0b;
+    }
+    .tab-btn.active::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        height: 3px;
+        background: #f59e0b;
+        border-radius: 2px;
+    }
+
+    /* Form Panels */
+    .form-container { position: relative; }
+    .form-panel {
+        position: absolute;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+        pointer-events: none;
+    }
+    .form-panel.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+        position: relative;
+    }
+
+    /* Input */
+    input {
+        transition: all 0.3s;
+        border: 2px solid transparent;
+    }
+    input:focus {
+        outline: none;
+        border-color: #f59e0b;
+        transform: scale(1.02);
+        box-shadow: 0 0 10px rgba(245,158,11,0.3);
+    }
+
+    /* Password toggle */
+    .password-toggle {
+        position: absolute;
+        right: 0.75rem;
+        top: 2.5rem;
+        cursor: pointer;
+        color: #555;
+        transition: color 0.3s;
+    }
+    .password-toggle:hover {
+        color: #f59e0b;
+    }
+
+    /* Buttons */
+    button {
+        transition: all 0.3s;
+    }
+    button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Notifications */
+    #notification-container {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        z-index: 50;
+    }
+</style>
+
+<script>
+function togglePasswordVisibility(id) {
+    const field = document.getElementById(id);
+    const icon = document.getElementById(id + '-eye');
+    if(field.type === 'password') {
+        field.type = 'text';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+    } else {
+        field.type = 'password';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+    }
+}
+
+function showNotification(message, type = "success") {
+    const container = document.getElementById('notification-container');
+    const card = document.createElement('div');
+    card.className = `max-w-sm w-80 p-4 rounded-xl shadow-lg flex justify-between items-center
+        ${type === 'success' ? 'bg-green-100 border-l-4 border-green-500' : 'bg-red-100 border-l-4 border-red-500'}
+        opacity-0 translate-y-6 transition-all duration-300`;
+
+    card.innerHTML = `<span class="font-semibold text-gray-800">${message}</span><button>&times;</button>`;
+    container.appendChild(card);
+    requestAnimationFrame(() => card.classList.remove('opacity-0','translate-y-6'));
+    card.querySelector('button').onclick = () => card.remove();
+    setTimeout(() => card.remove(), 5000);
+}
+
+function loginUser(event) {
+    event.preventDefault();
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+
+    const storedUser = localStorage.getItem('adminUsername');
+    const storedPass = localStorage.getItem('adminPassword');
+
+    if(username === storedUser && password === storedPass) {
+        showNotification("Login successful!");
+        setTimeout(() => window.location.href = 'admin.html', 1000);
+    } else {
+        showNotification("Invalid username or password!", "error");
+    }
+}
+
+function registerUser(event) {
+    event.preventDefault();
+    const username = document.getElementById('signup-username').value;
+    const password = document.getElementById('signup-password').value;
+    const confirm = document.getElementById('signup-confirm').value;
+
+    if(password !== confirm) {
+        showNotification("Passwords do not match!", "error");
+        return;
+    }
+
+    localStorage.setItem('adminUsername', username);
+    localStorage.setItem('adminPassword', password);
+
+    showNotification("Registration successful!");
+    showTab('login');
+}
+
+function showTab(tab) {
+    document.getElementById('login-form-panel').classList.toggle('active', tab==='login');
+    document.getElementById('signup-form-panel').classList.toggle('active', tab==='signup');
+    document.getElementById('tab-login').classList.toggle('active', tab==='login');
+    document.getElementById('tab-signup').classList.toggle('active', tab==='signup');
+}
+
+document.addEventListener("DOMContentLoaded", () => showTab('login'));
+</script>
+</head>
+
+<body class="min-h-screen flex items-center justify-center px-4">
+
+<div class="glass shadow-2xl rounded-3xl p-10 max-w-md w-full text-gray-800">
+
+    <!-- Logo -->
+    <div class="flex flex-col items-center mb-6">
+        <img src="logo.png" class="w-28 h-28 mb-4"/>
+        <h2 class="text-3xl font-extrabold text-gray-800">Admin Portal</h2>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex justify-center mb-6 space-x-4">
+        <button id="tab-login" class="tab-btn" onclick="showTab('login')">Sign In</button>
+        <button id="tab-signup" class="tab-btn" onclick="showTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- Forms -->
+    <div class="form-container">
+
+        <!-- LOGIN -->
+        <form id="login-form-panel" onsubmit="loginUser(event)" class="form-panel space-y-6">
+            <div>
+                <label>Username</label>
+                <input type="text" id="login-username" placeholder="Enter username" required
+                class="w-full p-3 rounded-xl shadow-sm focus:shadow-md"/>
+            </div>
+
+            <div class="relative">
+                <label>Password</label>
+                <input type="password" id="login-password" required class="w-full p-3 rounded-xl shadow-sm focus:shadow-md"/>
+                <i id="login-password-eye" class="fas fa-eye password-toggle"
+                onclick="togglePasswordVisibility('login-password')"></i>
+            </div>
+
+            <button class="w-full py-3 bg-yellow-400 rounded-xl font-bold hover:bg-yellow-500 text-white">Sign In</button>
+        </form>
+
+        <!-- SIGNUP -->
+        <form id="signup-form-panel" onsubmit="registerUser(event)" class="form-panel space-y-6">
+            <div>
+                <label>Username</label>
+                <input type="text" id="signup-username" placeholder="Create username" required
+                class="w-full p-3 rounded-xl shadow-sm focus:shadow-md"/>
+            </div>
+
+            <div class="relative">
+                <label>Password</label>
+                <input type="password" id="signup-password" required class="w-full p-3 rounded-xl shadow-sm focus:shadow-md"/>
+                <i id="signup-password-eye" class="fas fa-eye password-toggle"
+                onclick="togglePasswordVisibility('signup-password')"></i>
+            </div>
+
+            <div class="relative">
+                <label>Confirm Password</label>
+                <input type="password" id="signup-confirm" required class="w-full p-3 rounded-xl shadow-sm focus:shadow-md"/>
+                <i id="signup-confirm-eye" class="fas fa-eye password-toggle"
+                onclick="togglePasswordVisibility('signup-confirm')"></i>
+            </div>
+
+            <button class="w-full py-3 bg-yellow-400 rounded-xl font-bold hover:bg-yellow-500 text-white">Sign Up</button>
+        </form>
+
+    </div>
+</div>
+
+<div id="notification-container"></div>
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Your Cart - Pinoy Fries</title>
+<link rel="icon" href="logo.png" type="image/png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<style>
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://www.thedailymeal.com/img/gallery/13-different-fries-styles-you-should-know-about/l-intro-1673449692.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    position: relative;
+}
+/* Animated gradient overlay */
+body::after {
+    content:'';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(255,200,0,0.05), rgba(255,150,0,0.05), rgba(255,200,0,0.05));
+    animation: backgroundShift 20s infinite linear;
+    z-index: -1;
+}
+@keyframes backgroundShift {
+    0% { background-position: 0 0; }
+    100% { background-position: 200% 200%; }
+}
+
+/* Main overlay */
+main {
+    background-color: rgba(0,0,0,0.5);
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+/* Header */
+header {
+    background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 20;
+    padding: 12px 0;
+}
+header nav {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 24px;
+}
+header nav a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+}
+header nav a:hover {
+    color: #FFA500;
+}
+
+/* Top-right cart */
+#top-right-cart {
+    position: fixed;
+    top: 12px;
+    right: 24px;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    padding: 8px 12px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    z-index: 40;
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+@keyframes floatUpDown {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Total price */
+#total-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #FFA500;
+    animation: pulsePrice 1.5s infinite;
+}
+@keyframes pulsePrice {
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+}
+
+/* Buttons */
+.ship-now-button, .order-more-button {
+    background: linear-gradient(90deg, #FFA500, #FFB347);
+    color: #000;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.ship-now-button:hover, .order-more-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,165,0,0.7);
+    animation: pulseGlow 1s infinite;
+}
+@keyframes pulseGlow {
+    0%,100%{box-shadow:0 0 0 rgba(255,165,0,0);}
+    50%{box-shadow:0 0 10px rgba(255,165,0,0.7);}
+}
+
+/* Product cards */
+.product-container {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.5s forwards;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.product-container:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* Fade-in */
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Product images wiggle */
+.product-image {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+.product-image:hover {
+    transform: scale(1.1) rotate(3deg);
+}
+
+/* Remove button */
+.remove-button {
+    background-color: #FF8C00;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.3s, transform 0.2s;
+}
+.remove-button:hover {
+    background-color: #FFB347;
+}
+.remove-button:active {
+    transform: scale(0.95) rotate(-3deg);
+}
+</style>
+</head>
+<body class="text-gray-800">
+
+<!-- Header -->
+<header class="flex justify-between px-6 max-w-6xl mx-auto">
+    <nav class="flex space-x-4">
+        <a class="text-white hover:text-orange-400 transition" href="index.html"><i class="fas fa-home mr-1"></i>HOME</a>
+        <a class="text-white hover:text-orange-400 transition" href="cart.html"><i class="fas fa-shopping-cart mr-1"></i>CART</a>
+        <a class="text-white hover:text-orange-400 transition" href="alcoholicbeer.html"><i class="fas fa-utensils mr-1"></i>FRIES</a>
+    </nav>
+</header>
+
+<!-- Top-right cart -->
+<div id="top-right-cart">
+    <div id="total-price">Total: ₱0.00</div>
+    <div class="flex space-x-2">
+        <button class="ship-now-button" onclick="shipNow()">
+            <i class="fas fa-cash-register mr-1"></i>Order Now
+        </button>
+        <a href="alcoholicbeer.html" class="order-more-button">
+            <i class="fas fa-plus-circle mr-1"></i>Order More
+        </a>
+    </div>
+</div>
+
+<!-- Main -->
+<main class="container mx-auto py-12 px-6">
+    <h2 class="text-4xl font-bold text-orange-400 mb-6 text-center">Your Fries Cart</h2>
+    <div id="cart-items" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+</main>
+
+<script>
+// Price formatting
+function formatPrice(price) {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// Load cart items
+function loadCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = '';
+    let totalPrice = 0;
+
+    cart.forEach((item, index) => {
+        const priceWithoutPeso = parseFloat(item.price.replace('₱','').replace(/,/g,''));
+        const subtotal = (priceWithoutPeso * item.quantity).toFixed(2);
+        const productDiv = document.createElement('div');
+        productDiv.className = 'text-center product-container';
+        productDiv.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="product-image" />
+            <p class="text-lg font-bold mt-2">${item.name}</p>
+            <p class="text-md font-semibold">₱${formatPrice(priceWithoutPeso.toFixed(2))} x ${item.quantity} = ₱${formatPrice(subtotal)}</p>
+            <button class="remove-button mt-2" onclick="removeItem(${index})">Remove</button>
+        `;
+        cartItemsContainer.appendChild(productDiv);
+        totalPrice += parseFloat(subtotal);
+    });
+
+    animateTotalPrice(totalPrice);
+}
+
+// Animate total price counting
+function animateTotalPrice(finalPrice) {
+    const totalPriceElement = document.getElementById('total-price');
+    let currentPrice = 0;
+    const duration = 1000;
+    const frameRate = 60;
+    const totalFrames = (duration / 1000) * frameRate;
+    const increment = finalPrice / totalFrames;
+
+    const animate = () => {
+        currentPrice += increment;
+        if (currentPrice < finalPrice) {
+            totalPriceElement.innerText = `Total: ₱${formatPrice(currentPrice.toFixed(2))}`;
+            requestAnimationFrame(animate);
+        } else {
+            totalPriceElement.innerText = `Total: ₱${formatPrice(finalPrice.toFixed(2))}`;
+        }
+    };
+    animate();
+}
+
+// Remove item with slide animation
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsContainer = document.getElementById('cart-items');
+    const itemDiv = cartItemsContainer.children[index];
+    itemDiv.style.transition = "opacity 0.3s, transform 0.3s";
+    itemDiv.style.opacity = 0;
+    itemDiv.style.transform = "translateX(100%)";
+    setTimeout(() => {
+        cart.splice(index,1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();
+    }, 300);
+}
+
+// Ship now
+function shipNow() {
+    window.location.href = 'shipping.html';
+}
+
+window.onload = loadCart;
+</script>
+</body>
+</html>
